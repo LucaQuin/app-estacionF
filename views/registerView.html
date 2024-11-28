@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Registrarse</title>
+</head>
+<body>
+
+	{{MSG_ERROR}}
+
+	<form method="POST">
+		<input type="email" name="txt_email_register" placeholder="Email" required>
+		<input type="password" name="txt_contra_register" placeholder="Ingresar contraseña" required>
+		<input type="password" name="txt_contra_register2" placeholder="Repetir contraseña" required>
+		<input type="submit" name="btn_register" required>
+	</form>
+
+	<div>{{REGISTRADO}}</div>
+
+</body>
+</html>

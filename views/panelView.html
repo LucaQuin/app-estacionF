@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Panel</title>
+	<link rel="stylesheet" href="views/css/panel.css?v=202020">
+</head>
+<body>
+
+	<!-- {{MSG_ERROR}} -->
+
+	<header></header>
+
+		
+	<main></main>
+
+	
+	
+
+<script src="views/js/panel.js"></script>
+
+<script type="text/javascript">
+
+	buscarIP().then( data => {
+		mostrarNReg(data.ip).then( data2 => {
+			agregarTracker(data2.ip, data2.latitude, data2.longitude, data2.country)
+	  	})
+	})
+
+
+
+	/**
+	 * 
+	 * @brief Devuelve todo los datos de la base de datos de todas las tiendas
+	 * @return json respuesta de la busqueda de los datos de las tiendas
+	 * 
+	 * */
+	async function agregarTracker(ip, latitude, longitude, country){
+	    /*< consulta a la API */
+	   	const response = await fetch("https://mattprofe.com.ar/alumno/6814/app-estacion3.0/api/Users/agregarTracker/?ip="+ip+"&&"+"latitude="+latitude+"&&"+"longitude="+longitude+"&&"+"country="+country);
+	    /*< convierte la respuesta a formato json */
+	    const data = await response.json();
+	    return data;
+	}
+
+	/**
+	 * 
+	 * @brief Devuelve todo los datos de la base de datos de todas las tiendas
+	 * @return json respuesta de la busqueda de los datos de las tiendas
+	 * 
+	 * */
+	async function buscarIP(){
+	    /*< consulta a la API */
+	    const response = await fetch("https://api.ipify.org?format=json");
+	    /*< convierte la respuesta a formato json */
+	    const data = await response.json();
+	    return data;
+	}
+
+	/**
+	 * 
+	 * @brief Devuelve todo los datos de la base de datos de todas las tiendas
+	 * @return json respuesta de la busqueda de los datos de las tiendas
+	 * 
+	 * */
+	async function mostrarNReg(ip){
+	    /*< consulta a la API */
+	    const response = await fetch("https://ipwho.is/"+ip);
+	    /*< convierte la respuesta a formato json */
+	    const data = await response.json();
+	    return data;
+	}
+
+
+
+	
+</script>
+
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+
+<a href="logout">Cerrar sesion</a><br><br>
+
+<a href="map">Mapa de clientes</a><br><br>
+
+<main></main>
+
+<script type="text/javascript">
+
+
+	let main = document.querySelector('main');
+
+
+
+	mostrarReg().then( data => {
+  		mostrarNReg().then( data2 => {
+	  		main.innerHTML = `
+	  			la cantidad de clietes es de ${data2[0]["COUNT(`ID_TRACEKR`)"]} y se clientes registrados es: ${data[0]["COUNT(`token`)"]}.
+	  		`
+	  	})
+  	})
+
+
+
+	/**
+	 * 
+	 * @brief Devuelve todo los datos de la base de datos de todas las tiendas
+	 * @return json respuesta de la busqueda de los datos de las tiendas
+	 * 
+	 * */
+	async function mostrarReg(){
+	    /*< consulta a la API */
+	    const response = await fetch("https://mattprofe.com.ar/alumno/6814/app-estacion3.0/api/Users/devolceRegis");
+	    /*< convierte la respuesta a formato json */
+	    const data = await response.json();
+	    return data;
+	}
+
+	/**
+	 * 
+	 * @brief Devuelve todo los datos de la base de datos de todas las tiendas
+	 * @return json respuesta de la busqueda de los datos de las tiendas
+	 * 
+	 * */
+	async function mostrarNReg(){
+	    /*< consulta a la API */
+	    const response = await fetch("https://mattprofe.com.ar/alumno/6814/app-estacion3.0/api/Users/devolceNRegis");
+	    /*< convierte la respuesta a formato json */
+	    const data = await response.json();
+	    return data;
+	}
+</script>
+
+</body>
+</html>

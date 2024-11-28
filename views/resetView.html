@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Registrarse</title>
+</head>
+<body>
+
+	
+	<div id="MSG_ERROR"></div>
+
+
+
+
+
+<script type="text/javascript">
+
+	const parametro = getParameterByName('token_action');
+
+  	let error = document.querySelector('#MSG_ERROR');
+
+  	verToken(parametro).then( data => {
+  		if (data["errno"]!=200) {
+  			error.innerHTML = `
+    			${data["error"]}
+  			`
+  		}else{
+  			error.innerHTML = `
+    			<form method="POST">
+					{{MSG_ERROR}}<br>
+					<input type="password" name="txt_contra_reset" placeholder="Ingresar contraseña" required>
+					<input type="password" name="txt_contra_reset2" placeholder="Repetir contraseña" required>
+					<input type="hidden" name="txt_token_active" value="${parametro}" required>
+					<input type="submit" name="btn_reset" value="acceder">
+				</form>
+  			`
+  		}
+  	})
+
+	// console.log(parametro);
+	function getParameterByName(name) {
+	  const urlParams = new URLSearchParams(window.location.search);
+	  return urlParams.get(name);
+	}
+
+
+	/**
+	 * 
+	 * @brief Devuelve todo los datos de la base de datos de todas las tiendas
+	 * @return json respuesta de la busqueda de los datos de las tiendas
+	 * 
+	 * */
+	async function verToken(token_action){
+	    /*< consulta a la API */
+	    const response = await fetch("https://mattprofe.com.ar/alumno/6814/app-estacion2.0/api/Users/verToken/?token_action="+token_action);
+
+	    /*< convierte la respuesta a formato json */
+	    const data = await response.json();
+  		 console.log(token_action)
+	    
+	    return data;
+	}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Registrarse</title>
+</head>
+<body>
+
+	
+	<div id="MSG_ERROR"></div>
+
+
+
+<script type="text/javascript">
+
+
+	const parametro = getParameterByName('token_action');
+
+  	let error = document.querySelector('#MSG_ERROR');
+
+  	mostrarProducto(parametro).then( data => {
+  		if (data["errno"]==200) {
+ 			window.location.href = "https://mattprofe.com.ar/alumno/6814/app-estacion2.0/login";
+  		}
+  		error.innerHTML = `
+    		${data["error"]}
+  		`
+  	})
+
+	// console.log(parametro);
+	function getParameterByName(name) {
+	  const urlParams = new URLSearchParams(window.location.search);
+	  return urlParams.get(name);
+	}
+
+
+	/**
+	 * 
+	 * @brief Devuelve todo los datos de la base de datos de todas las tiendas
+	 * @return json respuesta de la busqueda de los datos de las tiendas
+	 * 
+	 * */
+	async function mostrarProducto(token_active){
+	    /*< consulta a la API */
+	    const response = await fetch("https://mattprofe.com.ar/alumno/6814/app-estacion2.0/api/Users/verify/?token_active="+token_active);
+	    /*< convierte la respuesta a formato json */
+	    const data = await response.json();
+	    return data;
+	}
+
+
+</script>
+
+</body>
+</html>
